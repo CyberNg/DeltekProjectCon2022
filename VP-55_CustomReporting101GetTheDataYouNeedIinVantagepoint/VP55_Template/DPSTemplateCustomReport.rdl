@@ -1,0 +1,422 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Report xmlns="http://schemas.microsoft.com/sqlserver/reporting/2005/01/reportdefinition" xmlns:rd="http://schemas.microsoft.com/SQLServer/reporting/reportdesigner">
+  <DataSources>
+    <DataSource Name="VisionDemo50">
+      <rd:DataSourceID>572e68bb-abe2-425a-9ab8-5c06f3651344</rd:DataSourceID>
+      <DataSourceReference>DefaultDataSource</DataSourceReference>
+    </DataSource>
+  </DataSources>
+  <InteractiveHeight>11in</InteractiveHeight>
+  <ReportParameters>
+    <ReportParameter Name="ActivePeriod">
+      <DataType>Integer</DataType>
+      <Nullable>true</Nullable>
+      <DefaultValue>
+        <Values>
+          <Value>200612</Value>
+        </Values>
+      </DefaultValue>
+      <AllowBlank>true</AllowBlank>
+      <Prompt>Active Period</Prompt>
+    </ReportParameter>
+    <ReportParameter Name="ActiveCompany">
+      <DataType>String</DataType>
+      <Nullable>true</Nullable>
+      <DefaultValue>
+        <Values>
+          <Value />
+        </Values>
+      </DefaultValue>
+      <AllowBlank>true</AllowBlank>
+      <Prompt>Active Company</Prompt>
+    </ReportParameter>
+    <ReportParameter Name="HeadingStartDate">
+      <DataType>DateTime</DataType>
+      <Nullable>true</Nullable>
+      <AllowBlank>true</AllowBlank>
+      <Prompt>Heading Start Date</Prompt>
+    </ReportParameter>
+    <ReportParameter Name="HeadingEndDate">
+      <DataType>DateTime</DataType>
+      <Nullable>true</Nullable>
+      <AllowBlank>true</AllowBlank>
+      <Prompt>Heading End Date</Prompt>
+    </ReportParameter>
+    <ReportParameter Name="FirmName">
+      <DataType>String</DataType>
+      <Nullable>true</Nullable>
+      <DefaultValue>
+        <Values>
+          <Value />
+        </Values>
+      </DefaultValue>
+      <AllowBlank>true</AllowBlank>
+      <Prompt>FirmName</Prompt>
+    </ReportParameter>
+  </ReportParameters>
+  <rd:DrawGrid>true</rd:DrawGrid>
+  <InteractiveWidth>8.5in</InteractiveWidth>
+  <rd:GridSpacing>0.1in</rd:GridSpacing>
+  <rd:SnapToGrid>false</rd:SnapToGrid>
+  <RightMargin>0.5in</RightMargin>
+  <LeftMargin>0.5in</LeftMargin>
+  <PageHeader>
+    <ReportItems>
+      <Textbox Name="page_PeriodRange">
+        <Width>2.07in</Width>
+        <Style>
+          <FontSize>8pt</FontSize>
+          <TextAlign>Center</TextAlign>
+        </Style>
+        <ZIndex>2</ZIndex>
+        <CanGrow>true</CanGrow>
+        <Left>2.78334in</Left>
+        <Height>0.16in</Height>
+        <Value></Value>
+      </Textbox>
+      <Textbox Name="page_Date">
+        <Width>2.6in</Width>
+        <Style>
+          <FontSize>8pt</FontSize>
+          <Format>F</Format>
+          <TextAlign>Right</TextAlign>
+        </Style>
+        <ZIndex>1</ZIndex>
+        <CanGrow>true</CanGrow>
+        <Left>4.86in</Left>
+        <Height>0.16in</Height>
+        <Value>=Now()</Value>
+      </Textbox>
+      <Textbox Name="page_ReportName">
+        <Width>2.7375in</Width>
+        <Style>
+          <FontSize>8pt</FontSize>
+        </Style>
+        <CanGrow>true</CanGrow>
+        <Height>0.16in</Height>
+        <Value>=ReportItems!body_ReportName.Value</Value>
+      </Textbox>
+    </ReportItems>
+    <Height>0.16in</Height>
+    <PrintOnLastPage>true</PrintOnLastPage>
+    <Style>
+      <BorderStyle>
+        <Top>Solid</Top>
+      </BorderStyle>
+    </Style>
+  </PageHeader>
+  <BottomMargin>0.5in</BottomMargin>
+  <rd:ReportID>834fbe54-9333-45f3-b1e6-575227c61595</rd:ReportID>
+  <DataSets>
+    <DataSet Name="ReportDataset">
+      <Fields>
+        <Field Name="Employee_Data_Source_Include_Labor">
+          <DataField>Employee Data Source Include Labor</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="Employee_Number">
+          <DataField>Employee Number</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="LD_Key">
+          <DataField>LD Key</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="Comment">
+          <DataField>Comment</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+      </Fields>
+      <Query>
+        <DataSourceName>VisionDemo50</DataSourceName>
+        <CommandText>&lt;SemanticQuery xmlns="http://schemas.microsoft.com/sqlserver/2004/10/semanticmodeling" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:rb="http://schemas.microsoft.com/sqlserver/2004/11/reportbuilder" xmlns:qd="http://schemas.microsoft.com/sqlserver/2004/11/semanticquerydesign"&gt;
+  &lt;Hierarchies&gt;
+    &lt;Hierarchy&gt;
+      &lt;BaseEntity&gt;
+        &lt;!--Accounts Payable Data Source--&gt;
+        &lt;EntityID&gt;G0bc8fb75-4e13-442d-a30e-a6d33c7a8d2f&lt;/EntityID&gt;
+      &lt;/BaseEntity&gt;
+    &lt;/Hierarchy&gt;
+  &lt;/Hierarchies&gt;
+&lt;/SemanticQuery&gt;</CommandText>
+      </Query>
+    </DataSet>
+  </DataSets>
+  <Code>'************************************************************
+' Used to divide numbers in an expression and avoid dividing by 0
+'************************************************************
+Function SafeDivide(ByVal numerator As Decimal, ByVal denominator As Decimal) As Decimal
+        If (denominator = 0) Then
+            Return 0
+        Else
+            Return numerator / denominator
+        End If
+ End Function
+
+</Code>
+  <Width>8.5in</Width>
+  <Body>
+    <ReportItems>
+      <Line Name="body_TopLine">
+        <Width>7.5in</Width>
+        <Style>
+          <BorderStyle>Solid</BorderStyle>
+        </Style>
+        <ZIndex>6</ZIndex>
+        <Height>0in</Height>
+      </Line>
+      <Textbox Name="body_PeriodRange">
+        <Top>0.33333in</Top>
+        <Width>2.07in</Width>
+        <Style>
+          <FontSize>8pt</FontSize>
+          <TextAlign>Center</TextAlign>
+        </Style>
+        <ZIndex>5</ZIndex>
+        <CanGrow>true</CanGrow>
+        <Left>2.78334in</Left>
+        <Height>0.16in</Height>
+        <Value />
+      </Textbox>
+      <Textbox Name="body_Time">
+        <Top>0.16459in</Top>
+        <Width>2.2in</Width>
+        <Style>
+          <FontSize>8pt</FontSize>
+          <Format>T</Format>
+          <TextAlign>Right</TextAlign>
+        </Style>
+        <ZIndex>4</ZIndex>
+        <CanGrow>true</CanGrow>
+        <Left>5.26in</Left>
+        <Height>0.16in</Height>
+        <Value>=Now()</Value>
+      </Textbox>
+      <Textbox Name="body_Date">
+        <Width>2.2in</Width>
+        <Style>
+          <FontSize>8pt</FontSize>
+          <Format>D</Format>
+          <TextAlign>Right</TextAlign>
+        </Style>
+        <ZIndex>3</ZIndex>
+        <CanGrow>true</CanGrow>
+        <Left>5.26in</Left>
+        <Height>0.16in</Height>
+        <Value>=Now()</Value>
+        <Top>0.01in</Top>
+      </Textbox>
+      <Textbox Name="body_FirmName">
+        <Top>0.33126in</Top>
+        <Width>2.7in</Width>
+        <Style>
+          <FontSize>8pt</FontSize>
+        </Style>
+        <ZIndex>2</ZIndex>
+        <CanGrow>true</CanGrow>
+        <Left>0.02in</Left>
+        <Height>0.16in</Height>
+        <Value>=Parameters!FirmName.Value</Value>
+      </Textbox>
+      <Textbox Name="body_ReportName">
+        <CanShrink>true</CanShrink>
+        <Width>5.22in</Width>
+        <Style>
+          <FontSize>18pt</FontSize>
+        </Style>
+        <ZIndex>1</ZIndex>
+        <CanGrow>true</CanGrow>
+        <Height>0.32in</Height>
+        <Value>[LabelCustomReportTemplate]</Value>
+        <Top>0.01in</Top>
+      </Textbox>
+      <Table Name="MainTable">
+        <DataSetName>ReportDataset</DataSetName>
+        <Top>0.51041in</Top>
+        <TableGroups>
+          <TableGroup>
+            <Grouping Name="group">
+              <Label>="[LabelGroup]"</Label>
+              <GroupExpressions>
+                <GroupExpression>""</GroupExpression>
+              </GroupExpressions>
+            </Grouping>
+            <Header>
+              <TableRows>
+                <TableRow>
+                  <TableCells>
+                    <TableCell>
+                      <ReportItems>
+                        <Textbox Name="group_GroupColumn">
+                          <Style>
+                            <FontSize>8pt</FontSize>
+                            <TextAlign>Left</TextAlign>
+                          </Style>
+                          <ZIndex>1</ZIndex>
+                          <CanGrow>true</CanGrow>
+                          <Value>="[LabelGroup2]"</Value>
+                        </Textbox>
+                      </ReportItems>
+                    </TableCell>
+                  </TableCells>
+                  <Height>0.16in</Height>
+                </TableRow>
+              </TableRows>
+            </Header>
+          </TableGroup>
+        </TableGroups>
+        <Width>1.1875in</Width>
+        <Details>
+          <TableRows>
+            <TableRow>
+              <TableCells>
+                <TableCell>
+                  <ReportItems>
+                    <Textbox Name="detail_GroupColumn">
+                      <Style>
+                        <FontSize>8pt</FontSize>
+                      </Style>
+                      <CanGrow>true</CanGrow>
+                      <Value />
+                    </Textbox>
+                  </ReportItems>
+                </TableCell>
+              </TableCells>
+              <Height>0.16in</Height>
+            </TableRow>
+          </TableRows>
+        </Details>
+        <Style>
+          <BorderStyle>
+            <Bottom>None</Bottom>
+          </BorderStyle>
+          <FontSize>8pt</FontSize>
+        </Style>
+        <Header>
+          <TableRows>
+            <TableRow>
+              <TableCells>
+                <TableCell>
+                  <ReportItems>
+                    <Textbox Name="header_GroupColumn">
+                      <Style>
+                        <BorderStyle>
+                          <Top>Solid</Top>
+                          <Bottom>Solid</Bottom>
+                        </BorderStyle>
+                        <FontSize>8pt</FontSize>
+                        <TextAlign>Left</TextAlign>
+                      </Style>
+                      <ZIndex>2</ZIndex>
+                      <CanGrow>true</CanGrow>
+                      <Value />
+                    </Textbox>
+                  </ReportItems>
+                </TableCell>
+              </TableCells>
+              <Height>0.3in</Height>
+            </TableRow>
+          </TableRows>
+          <RepeatOnNewPage>true</RepeatOnNewPage>
+        </Header>
+        <TableColumns>
+          <TableColumn>
+            <Width>1.1875in</Width>
+          </TableColumn>
+        </TableColumns>
+      </Table>
+    </ReportItems>
+    <Height>1.13041in</Height>
+  </Body>
+  <CustomProperties>
+    <CustomProperty>
+      <Name>ReportType</Name>
+      <Value>
+      </Value>
+    </CustomProperty>
+    <CustomProperty>
+      <Name>ResourceFileName</Name>
+      <Value>VisionTemplateCustomReport</Value>
+    </CustomProperty>
+    <CustomProperty>
+      <Name>ReportVersion</Name>
+      <Value>1.0</Value>
+    </CustomProperty>
+    <CustomProperty>
+      <Name>LookupType</Name>
+      <Value />
+    </CustomProperty>
+    <CustomProperty>
+      <Name>GroupingType</Name>
+      <Value />
+    </CustomProperty>
+    <CustomProperty>
+      <Name>AutoGroupQuery</Name>
+      <Value>Y</Value>
+    </CustomProperty>
+    <CustomProperty>
+      <Name>OptionForm</Name>
+      <Value />
+    </CustomProperty>
+    <CustomProperty>
+      <Name>HelpFile</Name>
+      <Value />
+    </CustomProperty>
+    <CustomProperty>
+      <Name>UseColumnSelection</Name>
+      <Value>N</Value>
+    </CustomProperty>
+    <CustomProperty>
+      <Name>AllowUserDefinedFields</Name>
+      <Value>N</Value>
+    </CustomProperty>
+    <CustomProperty>
+      <Name>AllowCalcFields</Name>
+      <Value>N</Value>
+    </CustomProperty>
+    <CustomProperty>
+      <Name>Modules</Name>
+      <Value />
+    </CustomProperty>
+  </CustomProperties>
+  <Language>=User!Language</Language>
+  <PageFooter>
+    <PrintOnFirstPage>true</PrintOnFirstPage>
+    <ReportItems>
+      <Textbox Name="pagefooter_FooterText">
+        <Top>0.04in</Top>
+        <Width>6.16in</Width>
+        <Style>
+          <FontSize>8pt</FontSize>
+        </Style>
+        <ZIndex>1</ZIndex>
+        <CanGrow>true</CanGrow>
+        <Height>0.16in</Height>
+        <Value>
+        </Value>
+      </Textbox>
+      <Textbox Name="pagefooter_PageNumber">
+        <Top>0.04in</Top>
+        <Width>1.2in</Width>
+        <Style>
+          <FontSize>8pt</FontSize>
+          <TextAlign>Right</TextAlign>
+        </Style>
+        <CanGrow>true</CanGrow>
+        <Left>6.26in</Left>
+        <Value>=String.Format("[LabelPage0of1]", Globals!PageNumber, Globals!TotalPages)</Value>
+      </Textbox>
+    </ReportItems>
+    <Height>0.20166in</Height>
+    <PrintOnLastPage>true</PrintOnLastPage>
+    <Style>
+      <BorderStyle>
+        <Top>Solid</Top>
+      </BorderStyle>
+      <BorderWidth>
+        <Default>1.5pt</Default>
+      </BorderWidth>
+    </Style>
+  </PageFooter>
+  <TopMargin>0.5in</TopMargin>
+</Report>
